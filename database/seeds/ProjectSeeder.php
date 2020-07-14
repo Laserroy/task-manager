@@ -11,6 +11,8 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Project::class, 50)->create();
+        factory(App\Project::class, 50)->create()->each(function ($project) {
+            $project->tasks()->saveMany(factory(App\ProjectTask::class, 5)->make());
+        });
     }
 }

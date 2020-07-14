@@ -8,6 +8,6 @@ class Project extends Model
 {
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(ProjectTask::class);
     }
 }

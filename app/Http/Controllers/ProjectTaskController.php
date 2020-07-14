@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Project;
-use App\Task;
+use App\ProjectTask;
 use Illuminate\Http\Request;
 
 class ProjectTaskController extends Controller
@@ -16,7 +16,8 @@ class ProjectTaskController extends Controller
      */
     public function index(Project $project)
     {
-        //
+        $tasks = $project->tasks->groupBy('state');
+        return view('project_tasks.index', compact('project', 'tasks'));
     }
 
     /**
@@ -49,7 +50,7 @@ class ProjectTaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, Task $task)
+    public function show(Project $project, ProjectTask $task)
     {
         //
     }
@@ -61,7 +62,7 @@ class ProjectTaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project, Task $task)
+    public function edit(Project $project, ProjectTask $task)
     {
         //
     }
@@ -74,7 +75,7 @@ class ProjectTaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project, Task $task)
+    public function update(Request $request, Project $project, ProjectTask $task)
     {
         //
     }
@@ -86,7 +87,7 @@ class ProjectTaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, Task $task)
+    public function destroy(Project $project, ProjectTask $task)
     {
         //
     }
