@@ -52,7 +52,7 @@ class ProjectTaskController extends Controller
      */
     public function show(Project $project, ProjectTask $task)
     {
-        //
+        return view('project_tasks.show', compact('project', 'task'));
     }
 
     /**
@@ -89,6 +89,8 @@ class ProjectTaskController extends Controller
      */
     public function destroy(Project $project, ProjectTask $task)
     {
-        //
+        $task->delete();
+
+        return redirect(route('projects.tasks.index', $project));
     }
 }
