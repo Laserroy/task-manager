@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\Task;
 use Illuminate\Http\Request;
 
-class TaskController extends Controller
+class ProjectTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Project $project)
     {
         //
     }
@@ -19,9 +22,10 @@ class TaskController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
         //
     }
@@ -30,9 +34,10 @@ class TaskController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Project $project)
     {
         //
     }
@@ -40,10 +45,11 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Project  $project
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project, Task $task)
     {
         //
     }
@@ -51,10 +57,11 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Project  $project
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project, Task $task)
     {
         //
     }
@@ -63,10 +70,11 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Project  $project
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project, Task $task)
     {
         //
     }
@@ -74,10 +82,11 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Project  $project
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project, Task $task)
     {
         //
     }

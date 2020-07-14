@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Project::class, function (Faker $faker) {
     return [
-        'name' => $faker->sentence($nbWords = 6, $variableNbWords = true)
+        'title' => $faker->sentence($nbWords = 3)
     ];
 });

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
         @foreach($projects as $project)
-        <p>{{ $project->name }}</p>
+        <p>{{ $project->title }}</p>
         @endforeach
         {{ $projects->links() }}
 </div>

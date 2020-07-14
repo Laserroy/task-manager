@@ -2,12 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Task;
+use App\ProjectTask;
 use Faker\Generator as Faker;
 
-$factory->define(Task::class, function (Faker $faker) {
+$factory->define(ProjectTask::class, function (Faker $faker) {
     return [
-        'name' => $faker->word(),
+        'title' => $faker->word(),
         'description' => $faker->paragraph(3)
     ];
 });
