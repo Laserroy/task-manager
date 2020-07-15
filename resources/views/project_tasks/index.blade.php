@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ $project->title }}</h1>
+    <h1><a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a></h1>
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>

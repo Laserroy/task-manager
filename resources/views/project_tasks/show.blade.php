@@ -2,16 +2,22 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ $task->title }}</h1>
-    <p>{{ $task->description }}</p>
-    <a href="{{ route('download', $task) }}">File</a>
-    <div class="btn-group" role="group">
-        <a href="{{ route('projects.tasks.edit', [$project, $task]) }}" class="btn btn-warning" role="button">Edit</a>
-        <form method="POST" action="{{ route('projects.tasks.destroy', [$project, $task]) }}">
-            @method('DELETE')
-            @csrf
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
-        </form>
-    </div>
+    <div class="jumbotron text-center">
+        <h2 class="card-title h2">{{ $task->title }}</h2>
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 pb-2">
+            <p class="card-text">{{ $task->description }}</p>
+            </div>
+        </div>
+        <hr class="my-4">
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-success" href="{{ route('download', $task) }}">Download file</a>
+            <form method="POST" action="{{ route('projects.tasks.destroy', [$project, $task]) }}">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+        </div>
+      </div>
 </div>
 @endsection

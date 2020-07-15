@@ -20,7 +20,7 @@ class CreateProjectTasksTable extends Migration
             $table->string('file_path')->nullable();
             $table->string('state');
             $table->integer('project_id')->unsigned();
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }
