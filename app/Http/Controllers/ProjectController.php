@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
@@ -37,7 +37,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = Project::create(['title' => $request->title]);
+
+        return redirect(route('projects.show', $project));
     }
 
     /**

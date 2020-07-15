@@ -11,7 +11,9 @@
         </div>
         <hr class="my-4">
         <div class="d-flex justify-content-end">
+            @isset($task->file_path)
             <a class="btn btn-success" href="{{ route('download', $task) }}">Download file</a>
+            @endisset
             <form method="POST" action="{{ route('projects.tasks.destroy', [$project, $task]) }}">
                 @method('DELETE')
                 @csrf
