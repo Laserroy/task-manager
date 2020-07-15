@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\ProjectTask;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectTaskController extends Controller
 {
@@ -28,7 +30,7 @@ class ProjectTaskController extends Controller
      */
     public function create(Project $project)
     {
-        //
+        return view('project_tasks.create', compact('project'));
     }
 
     /**
@@ -40,7 +42,21 @@ class ProjectTaskController extends Controller
      */
     public function store(Request $request, Project $project)
     {
-        //
+        $title = $request->title;
+        $description = $request->description;
+        $filePath = '';
+
+        if ($request->file) {
+            $file = $request->file;
+            $originName = $file->getClientOriginalName();
+            $filePath = $file->storeAs('/storage/uploads/' . $request->title, $originName);
+        }
+
+        $newTask = $project->tasks()->create([
+            'title' => $title,
+            'description' => $description,
+            'file_path' => $filePath
+        ]);
     }
 
     /**

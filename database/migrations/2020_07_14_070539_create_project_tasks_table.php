@@ -17,6 +17,7 @@ class CreateProjectTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
+            $table->string('file_path')->nullable();
             $table->string('state');
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');
