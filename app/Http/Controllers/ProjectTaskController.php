@@ -49,7 +49,7 @@ class ProjectTaskController extends Controller
         if ($request->file) {
             $file = $request->file;
             $originName = $file->getClientOriginalName();
-            $filePath = $file->storeAs('/storage/uploads/' . $request->title, $originName);
+            $filePath = $file->storeAs('public/' . $request->title, $originName);
         }
 
         $newTask = $project->tasks()->create([

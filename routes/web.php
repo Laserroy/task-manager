@@ -23,4 +23,6 @@ Route::resource('projects.tasks', 'ProjectTaskController');
 
 Auth::routes();
 
+Route::get('/storage/{task}', 'DownloadController')->name('download');
+
 Route::get('/home', 'HomeController@index')->name('home');
