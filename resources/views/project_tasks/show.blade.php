@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('projects.tasks.index', $project) }}">back to task list</a>
     <div class="jumbotron text-center">
         <h2 class="card-title h2">{{ $task->title }}</h2>
         <div class="row d-flex justify-content-center">
@@ -14,6 +15,7 @@
             @isset($task->file_path)
             <a class="btn btn-success" href="{{ route('download', $task) }}">Download file</a>
             @endisset
+            <a class="btn btn-warning" href="{{ route('projects.tasks.edit', [$project, $task]) }}">Edit</a>
             <form method="POST" action="{{ route('projects.tasks.destroy', [$project, $task]) }}">
                 @method('DELETE')
                 @csrf

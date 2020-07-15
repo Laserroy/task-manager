@@ -44,19 +44,20 @@ class ProjectTaskController extends Controller
     {
         $title = $request->title;
         $description = $request->description;
-        $filePath = '';
+
+        $newTask = $project->tasks()->create([
+            'title' => $title,
+            'description' => $description
+        ]);
 
         if ($request->file) {
             $file = $request->file;
             $originName = $file->getClientOriginalName();
             $filePath = $file->storeAs('public/' . $request->title, $originName);
+            $newTask->update(['file_path' => $filePath]);
         }
 
-        $newTask = $project->tasks()->create([
-            'title' => $title,
-            'description' => $description,
-            'file_path' => $filePath
-        ]);
+        return redirect(route('projects.tasks.show', [$project, $newTask]));
     }
 
     /**
@@ -80,7 +81,7 @@ class ProjectTaskController extends Controller
      */
     public function edit(Project $project, ProjectTask $task)
     {
-        //
+        return view('project_tasks.edit', compact('project', 'task'));
     }
 
     /**
@@ -93,7 +94,22 @@ class ProjectTaskController extends Controller
      */
     public function update(Request $request, Project $project, ProjectTask $task)
     {
-        //
+        $title = $request->title;
+        $description = $request->description;
+
+        $project->tasks()->whereTitle($task->title)->update([
+            'title' => $title,
+            'description' => $description
+        ]);
+
+        if ($request->file) {
+            $file = $request->file;
+            $originName = $file->getClientOriginalName();
+            $filePath = $file->storeAs('public/' . $request->title, $originName);
+            $project->tasks()->whereTitle($task->title)->update(['file_path' => $filePath]);
+        }
+
+        return redirect(route('projects.tasks.show', [$project, $task]));
     }
 
     /**

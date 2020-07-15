@@ -9,8 +9,8 @@
             <input type="text" name="title" class="form-control" id="formTitle" aria-describedby="titleHelp">
           </div>
           <div class="form-group">
-            <label for="descript">Description:</label>
-            <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+            <label for="taskDescription">Description:</label>
+            <textarea class="form-control" name="description" id="taskDescription" rows="5"></textarea>
           </div>
         <div class="form-group">
             <label for="FormControlFile">Select image or document</label>
