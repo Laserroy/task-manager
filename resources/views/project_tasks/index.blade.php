@@ -24,7 +24,9 @@
         <div class="tab-content" id="tabs-tabContent">
             <div class="tab-pane fade show active" id="tabs-all" role="tabpanel" aria-labelledby="tabs-all-tab">
                 @foreach($project->tasks as $task)
-                <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="list-group-item list-group-item-action">{{ $task->title }}</a>
+                <div class="list-group-item">
+                    <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="">{{ $task->title }}</a>
+                </div>
                 @endforeach
             </div>
             <div class="tab-pane fade" id="tabs-new" role="tabpanel" aria-labelledby="tabs-new-tab">

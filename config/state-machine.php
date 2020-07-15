@@ -1,16 +1,11 @@
 <?php
 
 return [
+
     'task_graph' => [
-        // class of your domain object
         'class' => App\ProjectTask::class,
-
-        // name of the graph (default is "default")
-        'graph' => 'graphA',
-
-        // property of your object holding the actual state (default is "state")
+        'graph' => 'task_graph',
         'property_path' => 'state',
-
         'metadata' => [
             'title' => 'task status',
         ],

@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\ProjectTask;
-use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProjectTaskController extends Controller
 {
