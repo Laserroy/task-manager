@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        extensions: mbstring, curl, dom, xml, zip, sqlite
+        tools: prestissimo
+        php-version: '7.4'
+
+    - name: PHP Security Checker
+      uses: StephaneBour/actions-php-security-checker@1.0
+
+    - name: Setup project
+      run: make setup
+
+    - name: Check lint
+      run: make lint
+
+    - name: Run test suite
+      run: make test
