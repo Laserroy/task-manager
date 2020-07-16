@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,19 +13,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('projects', 'ProjectController');
-
-Route::post('projects/{project}/tasks/{task}/status', 'ProjectTaskController@changeStatus')->name('change_status');
-
-Route::resource('projects.tasks', 'ProjectTaskController');
-
-Auth::routes();
-
-Route::get('/storage/{task}', 'DownloadController')->name('download');
+Route::group(
+    [
+        'middleware' => ['auth']
+    ],
+    function () {
+        Route::resource('projects', 'ProjectController')->except(['edit', 'update']);
+        Route::post('projects/{project}/tasks/{task}/status', 'ProjectTaskController@changeStatus')
+            ->name('change_status');
+        Route::resource('projects.tasks', 'ProjectTaskController');
+        Route::get('/storage/{task}', 'DownloadController')->name('download');
+    }
+);
 
 Route::get('/home', 'HomeController@index')->name('home');

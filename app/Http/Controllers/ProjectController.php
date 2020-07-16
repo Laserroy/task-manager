@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(10);
+        $user = Auth::user();
+        $projects = $user->projects()->paginate(10);
 
         return view('project.index', compact('projects'));
     }
@@ -37,7 +39,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $project = Project::create(['title' => $request->title]);
+        $user = Auth::user();
+
+        $project = $user->projects()->create(['title' => $request->title]);
 
         return redirect(route('projects.show', $project));
     }
@@ -51,29 +55,6 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         return view('project.show', compact('project'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
