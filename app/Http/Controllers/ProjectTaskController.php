@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTask;
+use App\Http\Requests\UpdateTask;
 use App\Project;
 use App\ProjectTask;
 use Illuminate\Http\Request;
@@ -43,7 +45,7 @@ class ProjectTaskController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Project $project)
+    public function store(StoreTask $request, Project $project)
     {
         $title = $request->title;
         $description = $request->description;
@@ -95,7 +97,7 @@ class ProjectTaskController extends Controller
      * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project, ProjectTask $task)
+    public function update(UpdateTask $request, Project $project, ProjectTask $task)
     {
         $title = $request->title;
         $description = $request->description;

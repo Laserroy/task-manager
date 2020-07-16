@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
@@ -39,6 +40,17 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:projects|max:100'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $user = Auth::user();
 
         $project = $user->projects()->create(['title' => $request->title]);
