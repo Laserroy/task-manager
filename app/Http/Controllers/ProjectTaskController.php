@@ -107,7 +107,7 @@ class ProjectTaskController extends Controller
         $title = $request->title;
         $description = $request->description;
 
-        $project->tasks()->whereTitle($task->title)->update([
+        $project->tasks()->where('title', $task->title)->update([
             'title' => $title,
             'description' => $description
         ]);
