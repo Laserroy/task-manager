@@ -6,11 +6,26 @@
         <a href="{{ route('projects.create') }}" role="button" class="btn btn-primary float-right">Create new project
         </a>
     </div>
-    <div class="list-group">
-        @foreach($projects as $project)
-        <a href="{{ route('projects.show', $project) }}" class="list-group-item list-group-item-action">{{ $project->title }}</a>
-        @endforeach
-    </div>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Project</th>
+            <th scope="col">Task count</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach($projects as $project)
+            <tr>
+            <td>
+                <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
+            </td>
+            <td>
+                <span class="badge badge-pill badge-primary">{{ count($project->tasks) }}</span>
+            </td>
+            </tr>
+            @endforeach
+        </tbody>
+      </table>
     {{ $projects->links() }}
 </div>
 

@@ -14,9 +14,14 @@ class ProjectTaskController extends Controller
      * @param  \App\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project)
+    public function index(Project $project, Request $request)
     {
-        $tasks = $project->tasks->groupBy('state');
+        $tasks = $project->tasks;
+
+        if ($request->filter) {
+            $tasks = $project->tasks()->where('state', $request->filter)->get();
+        }
+
         return view('project_tasks.index', compact('project', 'tasks'));
     }
 
@@ -122,5 +127,20 @@ class ProjectTaskController extends Controller
         $task->delete();
 
         return redirect(route('projects.tasks.index', $project));
+    }
+
+    public function changeStatus(Project $project, ProjectTask $task)
+    {
+        if ($task->canApply('accept_task')) {
+            $task->apply('accept_task');
+            $task->save();
+            return redirect()->back()->with('status', 'Task was added');
+        }
+
+        if ($task->canApply('finish_task')) {
+            $task->apply('finish_task');
+            $task->save();
+            return redirect()->back()->with('status', 'Task was finished');
+        }
     }
 }

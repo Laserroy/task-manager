@@ -2,55 +2,75 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between">
-        <a href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
-        <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-sm btn-primary" role="button">Add new task</a>
+    <div class="pb-3">
+        <a class="display-4" href="{{ route('projects.show', $project) }}">{{ $project->title }}</a>
+        <a href="{{ route('projects.tasks.create', $project) }}" class="btn btn-primary float-right" role="button">Add new task</a>
     </div>
-    <ul class="nav nav-tabs mb-3" id="tabs-tab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="tabs-all-tab" data-toggle="pill" href="#tabs-all" role="tab" aria-controls="tabs-all" aria-selected="true">All</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="tabs-new-tab" data-toggle="pill" href="#tabs-new" role="tab" aria-controls="tabs-new" aria-selected="false">New</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="tabs-progress-tab" data-toggle="pill" href="#tabs-progress" role="tab" aria-controls="tabs-progress" aria-selected="false">In progress</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="tabs-completed-tab" data-toggle="pill" href="#tabs-completed" role="tab" aria-controls="tabs-completed" aria-selected="false">Completed</a>
-        </li>
-    </ul>
-    <div class="list-group">
-        <div class="tab-content" id="tabs-tabContent">
-            <div class="tab-pane fade show active" id="tabs-all" role="tabpanel" aria-labelledby="tabs-all-tab">
-                @foreach($project->tasks as $task)
-                <div class="list-group-item">
-                    <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="">{{ $task->title }}</a>
-                </div>
-                @endforeach
-            </div>
-            <div class="tab-pane fade" id="tabs-new" role="tabpanel" aria-labelledby="tabs-new-tab">
-                @isset($tasks['new'])
-                @foreach($tasks['new'] as $task)
-                <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="list-group-item list-group-item-action">{{ $task->title }}</a>
-                @endforeach
-                @endisset
-            </div>
-            <div class="tab-pane fade" id="tabs-progress" role="tabpanel" aria-labelledby="tabs-progress-tab">
-                @isset($tasks['in_progress'])
-                @foreach($tasks['in_progress'] as $task)
-                <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="list-group-item list-group-item-action">{{ $task->title }}</a>
-                @endforeach
-                @endisset
-            </div>
-            <div class="tab-pane fade" id="tabs-completed" role="tabpanel" aria-labelledby="tabs-completed-tab">
-                @isset($tasks['completed'])
-                @foreach($tasks['completed'] as $task)
-                <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="list-group-item list-group-item-action">{{ $task->title }}</a>
-                @endforeach
-                @endisset
+    <form method="GET" action="{{ route('projects.tasks.index', $project) }}">
+        @csrf
+        <div class="input-group mb-3">
+            <select class="custom-select" name="filter" id="inputGroupSelect">
+                <option value="" selected>All</option>
+                <option value="new">New</option>
+                <option value="in_progress">In progress</option>
+                <option value="completed">Completed</option>
+            </select>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary float-right">Filter</button>
             </div>
         </div>
-    </div>
+    </form>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            @foreach($tasks as $task)
+            <tr>
+                <td>
+                    <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="">{{ $task->title }}</a>
+                </td>
+                @switch($task->state)
+                        @case('new')
+                            <td>
+                                <span class="badge badge-pill badge-success">new</span>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ route('change_status', [$project, $task]) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-primary float-right" onclick="return confirm('Take to work?')">Accept</button>
+                                </form>
+                            </td>
+                            @break
+                        @case('in_progress')
+                            <td>
+                                <span class="badge badge-pill badge-warning">in progress</span>
+                            </td>
+                            <td>
+                                <form method="POST" action="{{ route('change_status', [$project, $task]) }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-success float-right" onclick="return confirm('Finish task?')">Finish</button>
+                                </form>
+                            </td>
+                            @break
+                        @case('completed')
+                            <td>
+                                <span class="badge badge-pill badge-secondary">completed</span>
+                            </td>
+                            <td>
+
+                            </td>
+                            @break
+                        @endswitch
+            </tr>
+            @endforeach
+        </tbody>
+      </table>
 </div>
+
 @endsection

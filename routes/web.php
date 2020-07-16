@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Route::resource('projects', 'ProjectController');
 
+Route::post('projects/{project}/tasks/{task}/status', 'ProjectTaskController@changeStatus')->name('change_status');
+
 Route::resource('projects.tasks', 'ProjectTaskController');
 
 Auth::routes();

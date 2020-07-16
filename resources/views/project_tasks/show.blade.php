@@ -11,10 +11,6 @@
             </div>
         </div>
         <hr class="my-4">
-        <div class="d-flex justify-content-start">
-
-            <a class="btn btn-warning" href="{{ route('projects.tasks.edit', [$project, $task]) }}">Edit</a>
-        </div>
         <div class="d-flex justify-content-end">
             @isset($task->file_path)
             <a class="btn btn-success" href="{{ route('download', $task) }}">Download file</a>

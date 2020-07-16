@@ -13,17 +13,17 @@ return [
         // list of all possible states
         'states' => [
             'new',
-            'in_process',
+            'in_progress',
             'completed'
         ],
         // list of all possible transitions
         'transitions' => [
             'accept_task' => [
                 'from' => ['new'],
-                'to' => 'in_process',
+                'to' => 'in_progress',
             ],
             'finish_task' => [
-                'from' =>  ['in_process'],
+                'from' =>  ['in_progress'],
                 'to' => 'completed',
             ]
         ],
