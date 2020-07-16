@@ -6,7 +6,7 @@
 
 Управление/создание проектов и задач.
 
-## [Демо](https://task-manager.herokuapp.com/)
+## [Демо](https://task-mnger.herokuapp.com/)
 
 * Установка:
   * `$ make install`
