@@ -24,7 +24,7 @@ class UpdateTask extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:100|unique:App\ProjectTask,title' . $this->task->title,
+            'title' => 'required|max:100|unique:project_tasks,title,' . $this->task->id,
             'description' => 'required|max:500',
             'file' => 'nullable|mimetypes:text/*,image/*'
         ];
