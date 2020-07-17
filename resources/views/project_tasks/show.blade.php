@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('projects.tasks.index', $project) }}">back to task list</a>
+    <a class="btn btn-primary mb-3" href="{{ route('projects.tasks.index', $project) }}">Task list</a>
     <div class="jumbotron text-center">
         <h2 class="card-title h2">{{ $task->title }}</h2>
         <div class="row d-flex justify-content-center">

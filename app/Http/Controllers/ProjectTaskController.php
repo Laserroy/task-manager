@@ -67,7 +67,7 @@ class ProjectTaskController extends Controller
             $newTask->update(['file_path' => $filePath]);
         }
 
-        return redirect(route('projects.tasks.show', [$project, $newTask]));
+        return redirect(route('projects.tasks.index', $project));
     }
 
     /**
