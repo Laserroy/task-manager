@@ -19,9 +19,11 @@
             <form method="POST" action="{{ route('projects.tasks.destroy', [$project, $task]) }}">
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                    Delete
+                </button>
             </form>
         </div>
-      </div>
+    </div>
 </div>
 @endsection

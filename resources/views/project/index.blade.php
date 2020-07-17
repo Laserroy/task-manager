@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-end mb-2">
-        <a href="{{ route('projects.create') }}" role="button" class="btn btn-primary float-right">Create new project
+        <a href="{{ route('projects.create') }}" role="button" class="btn btn-primary float-right">
+            Create new project
         </a>
     </div>
     <table class="table">

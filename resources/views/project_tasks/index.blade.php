@@ -20,20 +20,21 @@
             </div>
         </div>
     </form>
-
     <table class="table">
         <thead>
-          <tr>
-            <th scope="col">Task</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-          </tr>
+            <tr>
+                <th scope="col">Task</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
         </thead>
         <tbody>
             @foreach($tasks as $task)
             <tr>
                 <td>
-                    <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="">{{ $task->title }}</a>
+                    <a href="{{ route('projects.tasks.show', [$project, $task]) }}" class="">
+                        {{ $task->title }}
+                    </a>
                 </td>
                 @switch($task->state)
                         @case('new')
@@ -43,7 +44,11 @@
                             <td>
                                 <form method="POST" action="{{ route('change_status', [$project, $task]) }}">
                                     @csrf
-                                    <button type="submit" class="btn btn-outline-primary float-right" onclick="return confirm('Take to work?')">Accept</button>
+                                    <button type="submit"
+                                            class="btn btn-outline-primary float-right"
+                                            onclick="return confirm('Take to work?')">
+                                        Accept
+                                    </button>
                                 </form>
                             </td>
                             @break
@@ -54,7 +59,11 @@
                             <td>
                                 <form method="POST" action="{{ route('change_status', [$project, $task]) }}">
                                     @csrf
-                                    <button type="submit" class="btn btn-outline-success float-right" onclick="return confirm('Finish task?')">Finish</button>
+                                    <button type="submit"
+                                            class="btn btn-outline-success float-right"
+                                            onclick="return confirm('Finish task?')">
+                                        Finish
+                                    </button>
                                 </form>
                             </td>
                             @break
@@ -62,15 +71,12 @@
                             <td>
                                 <span class="badge badge-pill badge-secondary">completed</span>
                             </td>
-                            <td>
-
-                            </td>
+                            <td></td>
                             @break
                         @endswitch
             </tr>
             @endforeach
         </tbody>
-      </table>
+    </table>
 </div>
-
 @endsection

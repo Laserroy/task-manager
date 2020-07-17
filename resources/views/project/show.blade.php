@@ -10,7 +10,9 @@
             <form method="POST" action="{{ route('projects.destroy', $project) }}">
                 @method('DELETE')
                 @csrf
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete project</button>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                    Delete project
+                </button>
             </form>
         </div>
       </div>
