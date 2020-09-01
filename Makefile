@@ -9,7 +9,7 @@ test:
 logs:
 	tail -f storage/logs/laravel.log
 lint:
-	composer run-script phpcs -- --standard=PSR2 ./app
+	composer run-script phpcs
 db-prepare:
 	php artisan migrate --seed
 config-clear:
